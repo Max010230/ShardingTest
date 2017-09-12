@@ -15,4 +15,9 @@ public class Slave1DataSource {
     private String username;
     private String password;
     private String driverClassName;
+    private Long connectionTimeout;
+    private Long idleTimeout;
+    private Long maxLifetime;
+    private Integer minimumIdle;
+    private Integer maximumPoolSize;
 }

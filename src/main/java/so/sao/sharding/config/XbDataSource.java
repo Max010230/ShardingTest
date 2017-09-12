@@ -6,6 +6,7 @@ import com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule;
 import com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule;
 import com.dangdang.ddframe.rdb.sharding.api.rule.TableRule;
 import com.google.common.collect.Lists;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -57,21 +58,45 @@ public class XbDataSource {
         return ShardingDataSourceFactory.createDataSource(shardingRule);
     }
 
-    private DataSource createDataSource(final String driverClassName, final String url, final String username, final String password) {
+    private DataSource createDataSource(final String driverClassName, final String url,
+                                        final String username,
+                                        final String password,
+                                        final Long ConnectionTimeout,
+                                        final Long IdleTimeout,
+                                        final Long MaxLifetime,
+                                        final Integer MinimumIdle,
+                                        final Integer MaximumPoolSize) {
 
-        return DataSourceBuilder.create().driverClassName(driverClassName).url(url).username(username).password(password).build();
+//        return DataSourceBuilder.create().driverClassName(driverClassName).url(url).username(username).password(password).build();
 
+        HikariDataSource hikariDataSource = new HikariDataSource();
+        hikariDataSource.setDriverClassName(driverClassName);
+        hikariDataSource.setJdbcUrl(url);
+        hikariDataSource.setUsername(username);
+        hikariDataSource.setPassword(password);
+        hikariDataSource.setConnectionTimeout(ConnectionTimeout);
+        hikariDataSource.setIdleTimeout(IdleTimeout);
+        hikariDataSource.setMaxLifetime(MaxLifetime);
+        hikariDataSource.setMinimumIdle(MinimumIdle);
+        hikariDataSource.setMaximumPoolSize(MaximumPoolSize);
+        return hikariDataSource;
     }
 
     private HashMap<String, DataSource> createDataSourceMap() throws SQLException {
         DataSource dataSource1 = createDataSource(masterDataSource.getDriverClassName(), masterDataSource.getUrl(),
-                masterDataSource.getUsername(), masterDataSource.getPassword());
+                masterDataSource.getUsername(), masterDataSource.getPassword(),masterDataSource.getConnectionTimeout(),
+                masterDataSource.getIdleTimeout(),masterDataSource.getMaxLifetime(),masterDataSource.getMinimumIdle(),
+                masterDataSource.getMaximumPoolSize());
 
         DataSource dataSource2 = createDataSource(slave1DataSource.getDriverClassName(), slave1DataSource.getUrl(),
-                slave1DataSource.getUsername(), slave1DataSource.getPassword());
+                slave1DataSource.getUsername(), slave1DataSource.getPassword(),slave1DataSource.getConnectionTimeout(),
+                slave1DataSource.getIdleTimeout(),slave1DataSource.getMaxLifetime(),slave1DataSource.getMinimumIdle(),
+                slave1DataSource.getMaximumPoolSize());
 
         DataSource dataSource3 = createDataSource(slave2DataSource.getDriverClassName(), slave2DataSource.getUrl(),
-                slave2DataSource.getUsername(), slave2DataSource.getPassword());
+                slave2DataSource.getUsername(), slave2DataSource.getPassword(),slave2DataSource.getConnectionTimeout(),
+                slave2DataSource.getIdleTimeout(),slave2DataSource.getMaxLifetime(),slave2DataSource.getMinimumIdle(),
+                slave2DataSource.getMaximumPoolSize());
         HashMap<String, DataSource> map = new HashMap<>();
         HashMap<String, DataSource> slaveDataSourceMap = new HashMap<>();
         slaveDataSourceMap.put("slave1", dataSource2);
