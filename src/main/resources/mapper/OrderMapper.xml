@@ -3,10 +3,10 @@
     <insert id="insert"></insert>
 
     <select id="findAll" resultType="so.sao.sharding.domain.Order">
-        SELECT * FROM `order`
+        SELECT * FROM `t_order_0`
     </select>
     <select id="findById" resultType="so.sao.sharding.domain.Order">
-        SELECT * FROM `order` where id=#{id}
+        SELECT * FROM `t_order_0` where order_id=#{id}
     </select>
     <select id="findAllOrders" resultType="so.sao.sharding.domain.Order">
         SELECT o.*

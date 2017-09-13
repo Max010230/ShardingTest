@@ -26,8 +26,7 @@ public class XbDataSource {
 
 
     @Bean
-    @Primary
-    public DataSource shardingDataSource() throws SQLException {
+    public DataSource dataSource() throws SQLException {
 
         DataSource dataSource1 = createDataSource(masterDataSource.getDriverClassName(), masterDataSource.getUrl(),
                 masterDataSource.getUsername(), masterDataSource.getPassword(),masterDataSource.getConnectionTimeout(),
