@@ -35,16 +35,31 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>com.dangdang</groupId>
-			<artifactId>sharding-jdbc-core</artifactId>
-			<version>1.5.3</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>com.dangdang</groupId>-->
+			<!--<artifactId>sharding-jdbc-core</artifactId>-->
+			<!--<version>1.5.3</version>-->
+		<!--</dependency>-->
+
+		<!--<dependency>-->
+			<!--<groupId>com.dangdang</groupId>-->
+			<!--<artifactId>sharding-jdbc-config-spring</artifactId>-->
+			<!--<version>1.5.3</version>-->
+		<!--</dependency>-->
 
 		<dependency>
 			<groupId>com.dangdang</groupId>
+			<artifactId>sharding-jdbc-core</artifactId>
+			<version>1.5.4-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/libs/sharding-jdbc-core-1.5.4-SNAPSHOT.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.dangdang</groupId>
 			<artifactId>sharding-jdbc-config-spring</artifactId>
-			<version>1.5.3</version>
+			<version>1.5.4-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/libs/sharding-jdbc-config-spring-1.5.4-SNAPSHOT.jar</systemPath>
 		</dependency>
 		<!--compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.44'-->
 		<dependency>
@@ -67,6 +82,14 @@
 			<artifactId>HikariCP</artifactId>
 			<version>2.6.3</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>23.0</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
