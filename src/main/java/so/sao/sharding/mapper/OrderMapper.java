@@ -16,7 +16,8 @@ public interface OrderMapper {
 
     Order findById(@Param("id") Integer id);
 
-    void insert(Order order);
+    int insert(Order order);
 
     List<Order> findAllOrders();
+
 }

@@ -32,4 +32,13 @@ public class OrderService {
     public List<Order> findAll(){
         return orderMapper.findAllOrders();
     }
+
+    public Order insert(){
+        Order order = new Order();
+        order.setUserId(1);
+        order.setStatus("1");
+        order.setOrderId(1);
+        orderMapper.insert(order);
+        return order;
+    }
 }

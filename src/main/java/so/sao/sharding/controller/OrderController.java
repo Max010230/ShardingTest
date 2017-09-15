@@ -1,5 +1,6 @@
 package so.sao.sharding.controller;
 
+import com.dangdang.ddframe.rdb.sharding.api.HintManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,12 @@ public class OrderController {
 
     @RequestMapping(value = "/{id}")
     public Order findById(@PathVariable Integer id) {
+        HintManager.getInstance().setMasterRouteOnly();
         return orderService.findById(id);
     }
 
+    @RequestMapping(value = "/insert")
+    public Order insert(){
+       return orderService.insert();
+    }
 }
